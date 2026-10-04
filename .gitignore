@@ -1,0 +1,11 @@
+.streamlit/secrets.toml
+secrets.toml
+.env
+.env.*
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+qa-output/
