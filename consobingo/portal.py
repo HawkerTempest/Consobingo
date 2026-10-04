@@ -91,39 +91,99 @@ def heartbeat():
         try:store().touch(st.session_state.cloud_session)
         except CloudError:pass
 
+def auth_failure(stage, exc):
+    """Retourne un diagnostic borné, sans afficher les messages bruts du serveur."""
+    hints={
+        'PGRST202':'La fonction de vérification est indisponible dans ce projet.',
+        '42501':'Les droits d’accès à l’annuaire doivent être vérifiés.',
+        'PGRST301':'La clé ou la session Supabase doit être vérifiée.',
+        'PGRST303':'La clé ou la session Supabase doit être vérifiée.',
+        'invalid_api_key':'La clé Supabase doit être vérifiée.',
+        'bad_jwt':'La clé ou la session Supabase doit être vérifiée.',
+        'no_authorization':'La configuration de connexion doit être vérifiée.',
+        'email_address_not_authorized':'Le service d’envoi Supabase doit être configuré pour cette adresse.',
+        'over_email_send_rate_limit':'La limite d’envoi est atteinte. Patiente avant de demander un nouveau code.',
+        'over_request_rate_limit':'Les demandes sont trop rapprochées. Patiente avant de réessayer.',
+        'email_provider_disabled':'La connexion par e-mail est désactivée dans Supabase.',
+        'otp_disabled':'La connexion par code est désactivée dans Supabase.',
+        'signup_disabled':'La création du compte de connexion est désactivée dans Supabase.',
+        'otp_expired':'Le code est incorrect ou expiré. Utilise le dernier code reçu.',
+        'invalid_credentials':'Le code n’a pas été accepté. Vérifie l’adresse et le dernier code reçu.',
+        'captcha_failed':'La configuration de vérification de connexion doit être contrôlée.',
+        'request_timeout':'Le service n’a pas répondu dans le délai prévu.',
+        'unexpected_failure':'Le service a rencontré une erreur. Consulte son journal avec cette référence.',
+    }
+    reference='INDISPONIBLE';hint='';seen=set();current=exc
+    for _ in range(8):
+        if current is None or id(current) in seen:break
+        seen.add(id(current))
+        code=getattr(current,'code',None)
+        if isinstance(code,str) and code in hints:
+            reference=code;hint=hints[code];break
+        if isinstance(current,TimeoutError) or type(current).__name__ in ('ReadTimeout','ConnectTimeout','WriteTimeout','PoolTimeout','AuthRetryableError'):
+            reference='DELAI';hint='La réponse du service n’a pas été confirmée.'
+        for name in ('status','status_code'):
+            status=getattr(current,name,None)
+            if reference=='INDISPONIBLE' and type(status) is int and 400<=status<=599:
+                reference='HTTP_'+str(status)
+        current=current.__cause__ or current.__context__
+    labels={
+        'CONFIGURATION':'La connexion à Supabase n’a pas pu être préparée.',
+        'ANNUAIRE':'La vérification de l’annuaire n’a pas abouti.',
+        'ENVOI':'L’envoi du code n’a pas pu être confirmé.',
+        'VALIDATION':'La connexion a échoué : le code ou l’accès n’a pas pu être validé.',
+        'SESSION':'Le code a été validé, mais la session de jeu n’a pas pu être ouverte.',
+    }
+    return ' '.join(x for x in (labels[stage],hint,f'Référence : {stage}/{reference}.') if x)
+
+
 def auth_screen():
     st.title('ConsoBingo')
     st.write('Une BD interactive pour explorer le comportement du consommateur et conseiller Pulse, une enseigne de salles de gym.')
-    role=st.radio('Accès',['student','teacher'],format_func=lambda x:'Étudiant' if x=='student' else 'Enseignant',horizontal=True)
-    pending=st.session_state.get('otp_pending')
-    if pending and pending['role']!=role:st.session_state.pop('otp_pending',None);pending=None
-    if not pending:
-        with st.form('send_code'):
-            email=st.text_input('Adresse e-mail habituelle',placeholder='prenom.nom@grenoble-em.com').strip().lower()
-            send=st.form_submit_button('Recevoir mon code',type='primary')
+    role=st.radio('Accès',['student','teacher'],format_func=lambda x:'Étudiant' if x=='student' else 'Enseignant',horizontal=True,key='auth_role')
+    st.caption('Demande un code, puis saisis-le ci-dessous. Si tu as déjà reçu un code, tu peux directement te connecter avec ton adresse et ce code.')
+    # Les deux étapes restent visibles, même après un délai réseau ou une nouvelle session.
+    with st.form('auth',enter_to_submit=False):
+        email=st.text_input('Adresse e-mail habituelle',placeholder='prenom.nom@grenoble-em.com',key='auth_email').strip().lower()
+        send=st.form_submit_button('Recevoir mon code',key='auth_send')
+        st.divider()
+        code=st.text_input('Code reçu',autocomplete='one-time-code',max_chars=10,key='auth_code')
+        verify=st.form_submit_button('Se connecter',type='primary',key='auth_verify')
+    if send or verify:
+        if not valid_email(email):st.error('Saisis une adresse valide.');return
+        if verify and not code.strip():st.error('Saisis le code reçu par e-mail.');return
+        try:client=store()
+        except Exception as exc:st.error(auth_failure('CONFIGURATION',exc));return
         if send:
-            if not valid_email(email):st.error('Saisis une adresse valide.');return
-            if time.time()-st.session_state.get('otp_at',0)<60:st.info('Patiente une minute avant de demander un autre code.');return
-            try:
-                if not store().allowed(email,role):st.error('Cette adresse n’est pas autorisée pour cet accès. Contacte ton enseignant.');return
-                store().send_otp(email)
-            except Exception:st.error('Le code n’a pas pu être envoyé. Réessaie plus tard ou contacte ton enseignant.');return
-            st.session_state.otp_pending={'email':email,'role':role};st.session_state.otp_at=time.time();st.rerun()
-    else:
-        st.info('Code envoyé à '+pending['email'])
-        st.caption('La réception peut prendre quelques minutes. Vérifie aussi les courriers indésirables.')
-        with st.form('verify_code'):
-            code=st.text_input('Code reçu',autocomplete='one-time-code',max_chars=10)
-            verify=st.form_submit_button('Se connecter',type='primary')
-        if verify:
-            try:
-                identity=store().login(pending['email'],code.strip(),pending['role'])
-                session=store().open_session() if identity['role']=='student' else None
-            except Exception:
-                store().logout();st.error('Code incorrect, expiré ou accès indisponible.');return
+            if time.time()-st.session_state.get('otp_at',0)<60:
+                st.info('Patiente une minute avant de demander un autre code. Tu peux saisir un code déjà reçu ci-dessus.');return
+            try:allowed=client.allowed(email,role)
+            except Exception as exc:st.error(auth_failure('ANNUAIRE',exc));return
+            if not allowed:
+                access='enseignant' if role=='teacher' else 'étudiant'
+                st.error(f'Cette adresse n’est pas autorisée pour l’accès {access}. Vérifie le rôle sélectionné et l’adresse saisie.');return
+            pending={'email':email,'role':role,'confirmed':False}
+            st.session_state.otp_pending=pending
+            # Un délai réseau peut survenir après l’envoi : éviter les demandes répétées.
+            st.session_state.otp_at=time.time()
+            try:client.send_otp(email)
+            except Exception as exc:pending['error']=auth_failure('ENVOI',exc)
+            else:pending['confirmed']=True
+        elif verify:
+            try:identity=client.login(email,code.strip(),role)
+            except Exception as exc:
+                client.logout();st.error(auth_failure('VALIDATION',exc));return
+            try:session=client.open_session() if identity['role']=='student' else None
+            except Exception as exc:
+                client.logout();st.error(auth_failure('SESSION',exc));return
             st.session_state.identity=identity;st.session_state.cloud_session=session;st.session_state.demo=False
             st.session_state.pop('otp_pending',None);st.rerun()
-        if st.button('Changer d’adresse ou redemander un code'):st.session_state.pop('otp_pending',None);st.rerun()
+    pending=st.session_state.get('otp_pending')
+    if pending and pending['email']==email and pending['role']==role:
+        if pending.get('confirmed'):
+            st.success('Code envoyé à '+email+'. Saisis-le dans le champ « Code reçu », puis clique sur « Se connecter ».')
+        elif pending.get('error'):
+            st.warning(pending['error']+' Si le code est arrivé, saisis-le ci-dessus et clique sur « Se connecter ».')
     st.caption('L’accès utilise l’annuaire déjà présent dans les jeux de marketing. Les résultats servent à l’autoévaluation et au suivi d’activité.')
 
 def start_screen():
