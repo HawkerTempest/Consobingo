@@ -1,0 +1,421 @@
+{
+  "cats": {
+    "ekb": [
+      "Reconnaissance du problème",
+      "Recherche d’informations",
+      "Évaluation des options",
+      "Intention d’achat",
+      "Achat / utilisation",
+      "Évaluation après achat"
+    ],
+    "factors": [
+      "Individuels",
+      "Situationnels",
+      "Sociaux / culturels"
+    ]
+  },
+  "clues": [
+    {
+      "id": "a1",
+      "speaker": "Léa",
+      "text": "Je compare les trois salles : prix, trajet, accompagnement.",
+      "ekb": 2,
+      "why": "Elle met les options en regard à l’aide de plusieurs critères."
+    },
+    {
+      "id": "a2",
+      "speaker": "Léa",
+      "text": "Avec mes revenus et mes dépenses habituelles, je ne peux consacrer que 40 € par mois à la salle.",
+      "factors": 0,
+      "why": "Ses ressources économiques limitent durablement le budget acceptable. Il ne s’agit pas d’une promotion du jour."
+    },
+    {
+      "id": "b1",
+      "speaker": "Message de Léa",
+      "text": "C’est décidé, je compte m’inscrire chez Pulse demain.",
+      "ekb": 3,
+      "why": "Elle annonce un projet. L’abonnement n’a pas encore été souscrit."
+    },
+    {
+      "id": "b2",
+      "speaker": "Léa, à Sarah",
+      "text": "Mon ancienne salle m’avait découragée : je ne savais pas utiliser les appareils.",
+      "factors": 0,
+      "why": "L’expérience passée nourrit un risque perçu et le besoin d’accompagnement."
+    },
+    {
+      "id": "c1",
+      "speaker": "Léa, après deux semaines",
+      "text": "Le coach m’aide vraiment à démarrer. C’est ce que j’espérais.",
+      "ekb": 5,
+      "why": "Léa confronte la performance vécue à ses attentes. Leur concordance peut produire de la satisfaction."
+    },
+    {
+      "id": "c2",
+      "speaker": "Léa",
+      "text": "Dans ma famille, on a toujours valorisé la pratique sportive.",
+      "factors": 2,
+      "why": "La famille transmet des valeurs qui rendent cette pratique désirable."
+    },
+    {
+      "id": "d1",
+      "speaker": "Léa, au bureau",
+      "text": "Je passe mes journées assise. J’aimerais retrouver un peu d’énergie.",
+      "ekb": 0,
+      "factors": 0,
+      "why": "Elle perçoit un écart entre son état actuel et un état souhaité. Le passage révèle aussi sa motivation personnelle."
+    },
+    {
+      "id": "d2",
+      "speaker": "Léa",
+      "text": "Cette semaine, un dossier urgent me fait terminer le travail plus tard que d’habitude.",
+      "factors": 1,
+      "why": "C’est une contrainte de temps liée aux circonstances de cette semaine."
+    },
+    {
+      "id": "e1",
+      "speaker": "Léa",
+      "text": "Je consulte les sites des salles du quartier et je demande leurs tarifs.",
+      "ekb": 1,
+      "why": "Elle engage une recherche externe d’informations avant de comparer."
+    },
+    {
+      "id": "e2",
+      "speaker": "Sarah, sa collègue",
+      "text": "Viens avec moi. On se motivera ensemble !",
+      "factors": 2,
+      "why": "Le groupe de référence et le soutien d’une collègue peuvent orienter le choix."
+    },
+    {
+      "id": "f1",
+      "speaker": "À l’accueil",
+      "text": "Votre abonnement est activé. Votre première séance commence à 19 h.",
+      "ekb": 4,
+      "why": "La souscription est réalisée et l’utilisation peut commencer. On a dépassé la seule intention."
+    },
+    {
+      "id": "f2",
+      "speaker": "Léa, devant une affiche",
+      "text": "L’essai gratuit ne vaut que jusqu’à ce soir. Il faut que je me décide.",
+      "factors": 1,
+      "why": "Une offre limitée dans le temps crée une pression au moment du choix."
+    }
+  ],
+  "panels": [
+    {
+      "letter": "A",
+      "title": "Trois brochures",
+      "art": 2,
+      "ids": [
+        "a1",
+        "a2"
+      ]
+    },
+    {
+      "letter": "B",
+      "title": "Un message à Sarah",
+      "art": 3,
+      "ids": [
+        "b1",
+        "b2"
+      ]
+    },
+    {
+      "letter": "C",
+      "title": "À la salle",
+      "art": 5,
+      "ids": [
+        "c1",
+        "c2"
+      ]
+    },
+    {
+      "letter": "D",
+      "title": "Au bureau",
+      "art": 0,
+      "ids": [
+        "d1",
+        "d2"
+      ]
+    },
+    {
+      "letter": "E",
+      "title": "La pause avec Sarah",
+      "art": 1,
+      "ids": [
+        "e1",
+        "e2"
+      ]
+    },
+    {
+      "letter": "F",
+      "title": "À l’accueil de Pulse",
+      "art": 4,
+      "ids": [
+        "f1",
+        "f2"
+      ]
+    }
+  ],
+  "mcg": [
+    {
+      "id": "exposure",
+      "art": 6,
+      "who": "Dans le tram",
+      "text": "Une affiche Pulse est dans le champ de vision de Léa pendant le trajet.",
+      "label": "Exposition",
+      "why": "Le message peut physiquement l’atteindre. Cela ne prouve pas encore qu’elle y prête attention."
+    },
+    {
+      "id": "attention",
+      "art": 6,
+      "who": "Léa relève les yeux",
+      "text": "Tiens, « des séances après le travail » !",
+      "label": "Attention",
+      "why": "Une partie du message capte son attention parce qu’elle rejoint une préoccupation."
+    },
+    {
+      "id": "comprehension",
+      "art": 2,
+      "who": "Elle lit « débutants accompagnés »",
+      "text": "Donc je n’ai pas besoin de savoir utiliser tous les appareils en arrivant.",
+      "label": "Compréhension",
+      "why": "Elle attribue un sens à la promesse. Comprendre ne signifie pas encore la croire."
+    },
+    {
+      "id": "acceptance",
+      "art": 1,
+      "who": "Sarah lui raconte sa première séance",
+      "text": "Tu confirmes que le coach t’a tout expliqué ? D’accord, leur promesse me paraît crédible.",
+      "label": "Acceptation",
+      "why": "Le témoignage de Sarah rend la promesse crédible pour Léa dans ce scénario."
+    },
+    {
+      "id": "retention",
+      "art": 7,
+      "who": "Le lendemain",
+      "text": "La salle avec les séances accompagnées… Ah oui, Pulse !",
+      "label": "Rétention",
+      "why": "Elle retrouve en mémoire le bénéfice et le nom de la marque."
+    }
+  ],
+  "offers": [
+    {
+      "id": "pulse",
+      "name": "Pulse",
+      "fee": 39,
+      "travel": 12,
+      "close": 22,
+      "coach": 2
+    },
+    {
+      "id": "tempo",
+      "name": "Tempo",
+      "fee": 29,
+      "travel": 25,
+      "close": 23,
+      "coach": 0
+    },
+    {
+      "id": "atelier",
+      "name": "Atelier Sport",
+      "fee": 49,
+      "travel": 8,
+      "close": 21,
+      "coach": 4
+    }
+  ],
+  "columns": [
+    {
+      "id": "fee",
+      "label": "Prix mensuel",
+      "unit": "€ / mois"
+    },
+    {
+      "id": "travel",
+      "label": "Trajet",
+      "unit": "minutes depuis le bureau"
+    },
+    {
+      "id": "close",
+      "label": "Fermeture",
+      "unit": "heure, ex. 22"
+    },
+    {
+      "id": "coach",
+      "label": "Séances accompagnées",
+      "unit": "incluses / semaine"
+    }
+  ],
+  "ruleNames": [
+    "Lexicographique",
+    "Conjonctive",
+    "Disjonctive",
+    "Compensatoire",
+    "Élimination par aspects"
+  ],
+  "rules": [
+    {
+      "text": "Je choisis d’abord le prix le plus bas. Seulement en cas d’égalité, je regarderai le temps de trajet.",
+      "keep": [
+        "tempo"
+      ],
+      "model": 0,
+      "why": "Le prix est prioritaire. Tempo coûte 29 €, le minimum. Les autres atouts ne compensent pas un prix plus élevé. Il n’y a pas d’égalité à départager.",
+      "transfer": "Pour cette règle, communiquer seulement sur le coaching ne change pas le critère décisif."
+    },
+    {
+      "text": "Je garde uniquement les salles à 40 € maximum, à 15 minutes maximum du bureau et avec au moins une séance accompagnée par semaine.",
+      "keep": [
+        "pulse"
+      ],
+      "model": 1,
+      "why": "Les trois conditions doivent être respectées ensemble. Pulse passe les trois. Tempo échoue sur le trajet et l’accompagnement. Atelier Sport dépasse le budget.",
+      "transfer": "C’est la règle retenue par Léa dans notre histoire : l’expérience passée, le temps disponible et le budget agissent ensemble."
+    },
+    {
+      "text": "Je garde une salle si elle coûte moins de 30 € par mois ou si elle offre au moins quatre séances accompagnées par semaine.",
+      "keep": [
+        "tempo",
+        "atelier"
+      ],
+      "model": 2,
+      "why": "Une seule condition suffit. Tempo passe par le prix. Atelier Sport passe par l’accompagnement. Pulse ne franchit aucun des deux seuils.",
+      "transfer": "Deux salles restent en lice. Ce filtre ne suffit pas à désigner un vainqueur unique."
+    }
+  ],
+  "facts": {
+    "prom": {
+      "v": 30,
+      "label": "30 réponses 9–10"
+    },
+    "pass": {
+      "v": 18,
+      "label": "18 réponses 7–8"
+    },
+    "det": {
+      "v": 12,
+      "label": "12 réponses 0–6"
+    },
+    "total": {
+      "v": 60,
+      "label": "60 réponses"
+    },
+    "start": {
+      "v": 200,
+      "label": "200 membres au départ"
+    },
+    "lost": {
+      "v": 20,
+      "label": "20 résiliations de la cohorte"
+    },
+    "new": {
+      "v": 35,
+      "label": "35 nouveaux membres"
+    },
+    "rev": {
+      "v": 39,
+      "label": "39 € de revenu mensuel"
+    },
+    "cost": {
+      "v": 25,
+      "label": "25 € de coûts mensuels"
+    },
+    "life": {
+      "v": 18,
+      "label": "18 mois de relation"
+    }
+  },
+  "metrics": [
+    {
+      "id": "nps",
+      "name": "NPS",
+      "unit": "points",
+      "fields": [
+        [
+          "prom",
+          "Promoteurs",
+          "prom"
+        ],
+        [
+          "det",
+          "Détracteurs",
+          "det"
+        ],
+        [
+          "total",
+          "Tous les répondants",
+          "total"
+        ]
+      ],
+      "result": 30,
+      "formula": "(promoteurs ÷ répondants − détracteurs ÷ répondants) × 100",
+      "why": "30 / 60 × 100 − 12 / 60 × 100 = 30 points. Les 18 passifs restent au dénominateur. Ce résultat mesure une intention de recommandation, pas un pourcentage de clients satisfaits."
+    },
+    {
+      "id": "churn",
+      "name": "Abandon",
+      "unit": "%",
+      "fields": [
+        [
+          "lost",
+          "Membres de départ perdus",
+          "lost"
+        ],
+        [
+          "start",
+          "Membres au début du mois",
+          "start"
+        ]
+      ],
+      "result": 10,
+      "formula": "membres de départ perdus ÷ membres au départ × 100",
+      "why": "20 / 200 × 100 = 10 %. On suit les personnes présentes au début du mois. Les 35 nouveaux membres ne réduisent pas le nombre de départs de cette cohorte."
+    },
+    {
+      "id": "retention",
+      "name": "Rétention",
+      "unit": "%",
+      "fields": [
+        [
+          "start",
+          "Membres au début du mois",
+          "start"
+        ],
+        [
+          "lost",
+          "Membres de départ perdus",
+          "lost"
+        ]
+      ],
+      "result": 90,
+      "formula": "(membres au départ − membres perdus) ÷ membres au départ × 100",
+      "why": "(200 − 20) / 200 × 100 = 90 %. Il reste 180 personnes de la cohorte initiale. L’effectif final est pourtant de 215 grâce aux 35 arrivées. Croissance et fidélisation sont deux mesures différentes."
+    },
+    {
+      "id": "ltv",
+      "name": "LTV",
+      "unit": "€ / client",
+      "fields": [
+        [
+          "rev",
+          "Revenu mensuel par membre",
+          "rev"
+        ],
+        [
+          "cost",
+          "Coûts mensuels par membre",
+          "cost"
+        ],
+        [
+          "life",
+          "Durée moyenne, en mois",
+          "life"
+        ]
+      ],
+      "result": 252,
+      "formula": "(revenu mensuel − coûts mensuels) × durée moyenne",
+      "why": "(39 − 25) × 18 = 252 €. C’est une valeur vie simplifiée fondée sur la marge de contribution, avant coût d’acquisition et sans actualisation. Les 18 mois sont une hypothèse fournie, pas une durée déduite du seul taux d’abandon de ce mois."
+    }
+  ]
+}
