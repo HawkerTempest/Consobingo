@@ -57,7 +57,7 @@ def test_pdf_export_and_mail_remain_formative():
     g=E.new_game(33);E.apply_solution(g,'factors');g['finished_at']=E.now()
     assert build_pdf(g,PROFILE).startswith(b'%PDF-')
     message=M.build_message(PROFILE,'completion',g,'https://example.org')
-    assert 'aucune note académique' in message['text'] and 'Corrigé consulté' in message['text']
+    assert 'carnet d’autoévaluation' in message['text'] and 'Corrigé consulté' in message['text']
 
 
 def test_csv_neutralizes_formula_and_contains_no_grade():

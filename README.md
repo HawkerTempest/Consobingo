@@ -2,9 +2,9 @@
 
 **Version prête pour GitHub et Streamlit Cloud.** Commencer par [LIRE_AVANT_GITHUB.md](LIRE_AVANT_GITHUB.md). Les fichiers `app.py` et `requirements.txt` doivent rester à la racine du dépôt. Le modèle des paramètres à renseigner dans Streamlit est `secrets.toml.example`.
 
-Jeu individuel d’autoévaluation pour le cours de comportement du consommateur. Une BD met en scène Léa, qui compare trois salles de sport. L’étudiant analyse son parcours puis conseille Pulse.
+Jeu individuel d’autoévaluation pour le cours de comportement du consommateur. Une BD met en scène Léa, qui compare trois salles de sport. L’étudiant analyse son parcours puis conseille Pulse, une enseigne de salles de gym.
 
-**Aucune note académique, aucun classement.** Le carnet distingue les activités comprises sur ce cas, les aides utilisées, les corrigés consultés et les points à reprendre. Terminer ne verrouille pas le parcours.
+Le carnet distingue les activités comprises sur ce cas, les aides utilisées, les corrigés consultés et les points à reprendre. Terminer ne verrouille pas le parcours.
 
 ## Essayer immédiatement sur son ordinateur
 
@@ -77,6 +77,6 @@ node tests/test_sql.cjs
 
 Le livrable a été vérifié localement. La connexion aux comptes réels, la réception du code et la distribution des courriels doivent être vérifiées après configuration dans l’environnement de déploiement. Il n’y a pas de dépendance à une API d’IA.
 
-Le jeu porte sur un cas et les notions choisies dans le polycopié fourni. « Compris sur ce cas » ne constitue ni une certification de maîtrise générale ni une note.
+Le jeu porte sur un cas et les notions choisies dans le polycopié fourni. Le repère « Compris sur ce cas » décrit la compréhension observée dans cette situation.
 
 Voir [PEDAGOGIE.md](PEDAGOGIE.md) pour les principes des corrections et [VERIFICATION.md](VERIFICATION.md) pour le périmètre testé.

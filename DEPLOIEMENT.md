@@ -83,4 +83,4 @@ En cas d’indisponibilité Supabase, les réponses restent dans la session et l
 
 Les tables et vues `conso_*` ne sont pas accessibles directement aux rôles publics. Les RPC déterminent l’identité à partir de la session Supabase Auth et vérifient les droits sur chaque opération. Un étudiant accède à ses propres parties ; un enseignant actif peut consulter le suivi. Les clés Brevo restent côté serveur.
 
-Le suivi est formatif et les états sont autoévaluatifs. Ce dispositif n’a pas pour objet de résister à la falsification d’une note d’examen.
+Le suivi est formatif et les états sont autoévaluatifs.

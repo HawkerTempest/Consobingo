@@ -1,4 +1,4 @@
-"""Bilans personnels et suivi d'usage : aucun export de note académique."""
+"""Bilans personnels et suivi d’usage."""
 from __future__ import annotations
 import csv
 from io import BytesIO, StringIO
@@ -34,7 +34,7 @@ def build_pdf(game, profile=None):
     styles['BodyText'].allowWidows=False;styles['BodyText'].allowOrphans=False
     styles.add(ParagraphStyle('SmallConso',parent=styles['BodyText'],fontSize=8,leading=11))
     p=lambda text,style='BodyText':Paragraph(_text(text),styles[style])
-    flow=[p('ConsoBingo – mon carnet d’autoévaluation','Title'),p('Léa se remet en mouvement. Cas fictif. Ce document ne constitue pas une note académique.')]
+    flow=[p('ConsoBingo – mon carnet d’autoévaluation','Title'),p('Léa se remet en mouvement. Cas fictif.')]
     if profile:
         flow.append(p(' '.join(profile.get(k,'') for k in ('first_name','last_name')).strip()))
         flow.append(p(' · '.join(str(profile.get(k,'')) for k in ('promotion','campus','group_name')),'SmallConso'))

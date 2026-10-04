@@ -4,7 +4,7 @@
 
 La conception suit les trois ensembles du polycopié fourni : facteurs d’influence ; modèle de décision EKB ; mécanismes complémentaires de formation de l’attitude, comparaison, règles de choix et indicateurs de relation client.
 
-Le personnage achète un abonnement de salle de sport. Les données du cas sont fictives. L’étudiant a un objectif continu : comprendre les arbitrages de Léa pour formuler deux conseils utiles à Pulse.
+Le personnage achète un abonnement de salle de sport. Les données du cas sont fictives. L’étudiant a un objectif continu : comprendre les arbitrages de Léa pour formuler deux conseils utiles à Pulse, une enseigne de salles de gym.
 
 ## Difficulté et corrections
 
@@ -41,7 +41,7 @@ Le carnet utilise les libellés suivants :
 - **Compris avec aide** : vérification cohérente après utilisation d’indices ;
 - **Corrigé consulté** : la correction a servi à compléter une activité.
 
-Consulter un corrigé n’ajoute pas une tentative autonome fictive. Les vérifications identiques consécutives ne gonflent pas le nombre d’essais. Les aides ne font perdre aucun point. Le jeu ne calcule aucune note globale.
+Consulter un corrigé n’ajoute pas une tentative autonome fictive. Les vérifications identiques consécutives ne gonflent pas le nombre d’essais.
 
 Le premier essai est conservé, avec un historique limité à trente versions vérifiées par activité. Les retours restent accessibles et le bilan final n’interdit aucune reprise.
 

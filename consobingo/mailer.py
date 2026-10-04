@@ -20,10 +20,10 @@ def build_message(profile,kind,game=None,app_url='',extra=''):
     if kind in ('completion','result'):
         if not game or not game.get('finished_at'):raise ValueError('Enregistre le bilan avant de demander son envoi.')
         subject='ConsoBingo : ton carnet d’autoévaluation'
-        parts+=['Ton parcours ConsoBingo a été enregistré. Ce jeu est un outil d’autoévaluation et ne donne aucune note académique.', '\n'.join(x['label']+' : '+x['status'] for x in summary(game)), 'Tu peux revenir dans le jeu pour reprendre les activités, consulter les explications ou recommencer une partie.']
+        parts+=['Ton parcours ConsoBingo a été enregistré. Voici ton carnet d’autoévaluation.', '\n'.join(x['label']+' : '+x['status'] for x in summary(game)), 'Tu peux revenir dans le jeu pour reprendre les activités, consulter les explications ou recommencer une partie.']
     elif kind=='invitation':
         subject='ConsoBingo : mène l’enquête dans le parcours de Léa'
-        parts+=['Une BD, des indices à retrouver et plusieurs façons de décider : ConsoBingo t’invite à utiliser les notions du cours sur le comportement du consommateur.', 'L’activité est individuelle, autonome et non notée. Connecte-toi avec ton adresse habituelle, puis saisis le code reçu par e-mail.']
+        parts+=['Une BD, des indices à retrouver et plusieurs façons de décider : ConsoBingo t’invite à utiliser les notions du cours sur le comportement du consommateur pour conseiller Pulse, une enseigne de salles de gym.', 'L’activité est individuelle et autonome. Connecte-toi avec ton adresse habituelle, puis saisis le code reçu par e-mail.']
     elif kind=='reminder':
         subject='ConsoBingo : ton enquête reste à explorer'
         parts+=['Tu peux commencer ou reprendre ton parcours ConsoBingo. Les indices, les tentatives et les corrigés servent uniquement à ton autoévaluation.', 'Reconnecte-toi avec ton adresse habituelle pour retrouver ta progression.']

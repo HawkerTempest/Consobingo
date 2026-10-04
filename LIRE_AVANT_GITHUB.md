@@ -49,4 +49,4 @@ Cette démo fonctionne sans Supabase ni Brevo. Elle n’envoie aucun courriel et
 
 Les détails de configuration, de connexion par code et de vérification des courriels figurent dans `DEPLOIEMENT.md`.
 
-Le jeu reste un outil d’autoévaluation non noté. Cette archive ne crée pas elle-même un dépôt GitHub et ne déploie pas l’application.
+Le jeu reste un outil d’autoévaluation. Cette archive ne crée pas elle-même un dépôt GitHub et ne déploie pas l’application.

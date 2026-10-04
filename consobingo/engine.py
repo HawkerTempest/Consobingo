@@ -1,4 +1,4 @@
-"""Moteur formatif déterministe. Pas de note académique ni de classement."""
+"""Moteur formatif déterministe."""
 from __future__ import annotations
 import ast
 import copy
@@ -253,7 +253,7 @@ def hint(game,section):
     return text
 
 def apply_solution(game,section):
-    # Le corrigé reste accessible, sans verrouillage ni pénalité académique.
+    # Le corrigé reste accessible pendant tout le parcours.
     was_complete=bool(game["feedback"].get(section,{}).get("complete") and game["feedback"][section].get("fingerprint")==fingerprint(game,section))
     if not was_complete: game["aids"][section]=3
     a=game["answers"]

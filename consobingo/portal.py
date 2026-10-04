@@ -93,7 +93,7 @@ def heartbeat():
 
 def auth_screen():
     st.title('ConsoBingo')
-    st.write('Une BD pour explorer le comportement du consommateur. Activité individuelle d’autoévaluation, sans note académique.')
+    st.write('Une BD interactive pour explorer le comportement du consommateur et conseiller Pulse, une enseigne de salles de gym.')
     role=st.radio('Accès',['student','teacher'],format_func=lambda x:'Étudiant' if x=='student' else 'Enseignant',horizontal=True)
     pending=st.session_state.get('otp_pending')
     if pending and pending['role']!=role:st.session_state.pop('otp_pending',None);pending=None
@@ -124,7 +124,7 @@ def auth_screen():
             st.session_state.identity=identity;st.session_state.cloud_session=session;st.session_state.demo=False
             st.session_state.pop('otp_pending',None);st.rerun()
         if st.button('Changer d’adresse ou redemander un code'):st.session_state.pop('otp_pending',None);st.rerun()
-    st.caption('L’accès utilise l’annuaire déjà présent dans les jeux de marketing. Les résultats servent à l’autoévaluation et au suivi d’activité, sans classement ni note.')
+    st.caption('L’accès utilise l’annuaire déjà présent dans les jeux de marketing. Les résultats servent à l’autoévaluation et au suivi d’activité.')
 
 def start_screen():
     p=st.session_state.identity
@@ -252,7 +252,7 @@ def teacher_mails(rows):
 
 def teacher_screen():
     st.title('ConsoBingo · Espace enseignant')
-    st.caption('Suivi de participation et de besoins de révision. Aucun classement, aucune note et aucune fonction de notation.')
+    st.caption('Suivi de participation et de besoins de révision.')
     left,right=st.columns(2)
     if left.button('Essayer le jeu en démo'):
         st.session_state.demo=True;install_game(new_game());st.rerun()
